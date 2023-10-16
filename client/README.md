@@ -8,7 +8,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Install Tailwind CSS
-```
+```bash
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
@@ -34,7 +34,7 @@ export default {
 @tailwind utilities;
 ```
 ## Start your build process
-```
+```bash
 npm run dev
 ```
 ## Start using Tailwind in your project
@@ -46,4 +46,9 @@ export default function App() {
     </h1>
   )
 }
+```
+## install Packages
+
+```bash
+npm i
 ```
