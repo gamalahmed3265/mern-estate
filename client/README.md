@@ -52,3 +52,7 @@ export default function App() {
 ```bash
 npm i
 ```
+## Run Project
+```bash
+npm run dev
+```
