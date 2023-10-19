@@ -5,12 +5,19 @@ import { errorHandler } from '../utils/error.js';
 import jwt from 'jsonwebtoken';
 
 export const signup=async (req,res,next)=>{
-    const { error } = validateRegistereUser(req.body);
-    if (error) {
-        return res.status(400).json({ message: error.details[0].message })
-    }
-    const { username, email, password } = req.body;
+    const { error } = validateRegistereUser(req.body.data);
+    // valur valid
+    // if (error) return next(errorHandler(400, error.details[0].message));
+    if (error) return res.status(400).json({message: error.details[0].message});
+    const { username, email, password } = req.body.data;
+    
+    // is user found
+    const validUser = await User.findOne({email} );
+
+    if (validUser) return next(errorHandler(400, 'User founded '));
+    
     const hashedPassword = bcryptjs.hashSync(password, 10);
+    
     const user=new User({email,username,password:hashedPassword});
     try {
         await user.save();
@@ -18,7 +25,7 @@ export const signup=async (req,res,next)=>{
             message:'User created successfully!'
         });
     } catch (error) {
-        return next(error);
+        return next(errorHandler(400, error.message));
     }
 }
 export const signin=async(req,res,next)=>{
@@ -32,7 +39,6 @@ export const signin=async(req,res,next)=>{
         const validUser = await User.findOne({email:dataRequest.email} );
         if (!validUser) return next(errorHandler(404, 'User not found!'));
         
-        console.log("pass: ", dataRequest.password);
         // valid password
         const validPassword = bcryptjs.compareSync(dataRequest.password, validUser.password);
 
@@ -63,8 +69,6 @@ export const google=(req,res,next)=>{
 }
 export const signOut=(req,res,next)=>{
     console.log(req.body);
-    const email=req.body.email;
-    console.log("email ",email);
 
     res.json({
         email:"email"
