@@ -29,7 +29,8 @@ export const signup=async (req,res,next)=>{
     }
 }
 export const signin=async(req,res,next)=>{
-    const dataRequest=req.body;
+    const dataRequest=req.body.data;
+    console.log(dataRequest);
     const {error} =validateSigninUser(dataRequest);
 
     if (error)return next(errorHandler(404, error.details[0].message));
