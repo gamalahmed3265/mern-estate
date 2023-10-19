@@ -5,6 +5,7 @@ import { Home } from './pages/home'
 import { SignUp } from './pages/SignUp'
 import { About } from './pages/About'
 import { SignIn } from './pages/SignIn';
+import {Notfound} from './pages/Notfound';
 
 function App() {
   return (
@@ -20,14 +21,5 @@ function App() {
   )
 }
 
-
-const Notfound = () => {
-  return (
-    <div className='mx-auto text-center notfound-fixed bg-slate-700 p-8 rounded-lg text-white'>
-      <div className="font-bold text-lg">Not found</div>
-      <p>Sorry. The Url is Wrong</p>
-    </div>
-  )
-}
 
 export default App
