@@ -1,7 +1,8 @@
 import express from "express";
 import { connectDB } from "./config/db.js";
-import UserRouter from "./routers/users.js";
+import userRouter from "./routers/users.js";
 import authRouter from "./routers/auth.js";
+import listingRouter from "./routers/listing.js";
 import dotenv from "dotenv";
 import path from 'path';
 import cors from "cors";
@@ -21,7 +22,8 @@ app.use(cors())
 app.use(cookieParser());
 
 app.use("/api/auth",authRouter);
-app.use("/api/user",UserRouter);
+app.use("/api/user",userRouter);
+app.use("/api/listing",listingRouter);
 
 app.use('*', notFound)
 

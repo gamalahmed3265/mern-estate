@@ -13,13 +13,12 @@ export const SignUp = () => {
         await axios.post("http://localhost:8800/api/auth/signup",{
             data: formData
         }).then((res)=>{
-            if (res.status===200 || res.status===2001) {
+            if (res.status===200 || res.status===201) {
                 setLoading(false)
                 setError(null);
                 navigate("/sign-in")
             }else{
                 setLoading(true)
-                console.log(res);
                 setError(res.data.message);
             }
         }).catch((err)=>{

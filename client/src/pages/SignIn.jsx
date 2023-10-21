@@ -14,17 +14,16 @@ export const SignIn = () => {
         await axios.post("http://localhost:8800/api/auth/signin",{
             data: formData
         }).then((res)=>{
-            if (res.status===200 || res.status===2001) {
+            if (res.status===200 || res.status===201) {
                 setLoading(false)
                 setError(null);
-                navigate("/")
+                // navigate("/")
             }else{
                 setLoading(true)
                 console.log(res);
                 setError(res.data.message);
             }
         }).catch((err)=>{
-            console.log(err.response.data.message);
             setLoading(false)
             setError(err.response.data.message);
         })
