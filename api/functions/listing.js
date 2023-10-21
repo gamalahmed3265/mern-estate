@@ -2,18 +2,18 @@ import Joi from "joi";
 
 export function validListingCreation(obi){
     return Joi.object({
-        name: Joi.string().trim().required().min(5).max(100),
-        description: Joi.string().trim().required().min(5).max(100),
+        name: Joi.string().trim().required().min(10).max(62),
+        description: Joi.string().trim().required().min(5),
         address: Joi.string().trim().required().min(5).max(100),
-        regularPrice: Joi.number().trim().required().min(5).max(100),
-        discountPrice: Joi.number().trim().required().min(5).max(100),
-        bathrooms: Joi.number().trim().required().min(5).max(100),
-        bedrooms: Joi.number().trim().required().min(5).max(100),
-        furnished: Joi.boolean().trim().required().min(5).max(100),
-        parking: Joi.boolean().trim().required().min(5).max(100),
+        regularPrice: Joi.number().required().min(50).max(10000000),
+        discountPrice: Joi.number().required(),
+        bathrooms: Joi.number().required().min(1).max(10),
+        bedrooms: Joi.number().required().min(1).max(10),
+        furnished: Joi.boolean().required(),
+        parking: Joi.boolean().required(),
         type: Joi.string().trim().required().min(5).max(100),
-        offer: Joi.boolean().trim().required().min(5).max(100),
-        imageUrls: Joi.array().trim().required().min(5).max(100),
-        userRef: Joi.string().trim().required().min(5).max(100),    
+        offer: Joi.boolean().required(),
+        imageUrls: Joi.array().required(),
+        userRef: Joi.string().trim().required().min(5).max(100), 
     }).validate(obi);
 }

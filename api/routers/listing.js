@@ -5,7 +5,7 @@ import { createListing } from "../controllers/listing.js";
 const router=express.Router();
 
 
-router.get('/create', createListing);
+router.post('/create', createListing);
 // router.delete('/delete/:id', verifyToken, deleteListing);
 // router.post('/update/:id', verifyToken, updateListing);
 // router.get('/get/:id', getListing);
