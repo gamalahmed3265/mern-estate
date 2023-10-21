@@ -2,30 +2,35 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Loading } from '../Compontens/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    signInStart,
+    signInSuccess,
+    signInFailure
+} from "../redux/user/userSlice.js";
 
 export const SignIn = () => {
     const [formData,setFormData]=useState({});
-    const [error,setError]=useState(null);
-    const [loading,setLoading]=useState(false);
+    const { loading, error } = useSelector((state) => state.user);
+
     const navigate=useNavigate();
+    const dispatch=useDispatch();
+
+
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        setLoading(true);
+        dispatch(signInStart());
         await axios.post("http://localhost:8800/api/auth/signin",{
             data: formData
         }).then((res)=>{
             if (res.status===200 || res.status===201) {
-                setLoading(false)
-                setError(null);
-                // navigate("/")
+                dispatch(signInSuccess(res.data.user))
+                navigate("/")
             }else{
-                setLoading(true)
-                console.log(res);
-                setError(res.data.message);
+                dispatch(signInFailure(res.data.message));
             }
         }).catch((err)=>{
-            setLoading(false)
-            setError(err.response.data.message);
+            dispatch(signInFailure(err.response.data.message));
         })
     }
 const handelChange=(e)=>{
