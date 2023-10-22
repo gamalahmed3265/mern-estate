@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Loading } from '../Compontens/Loading';
+import OAuth from '../Compontens/OAuth';
 export const SignUp = () => {
     const [formData,setFormData]=useState({});
     const [error,setError]=useState(null);
@@ -67,7 +68,7 @@ const handelChange=(e)=>{
                     SignUp
                 </button>
                 }
-
+            <OAuth/>
             </form>
             <div className='flex gap-2 mt-5'>
                 <p>Have an account?</p>

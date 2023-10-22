@@ -8,6 +8,7 @@ import {
     signInSuccess,
     signInFailure
 } from "../redux/user/userSlice.js";
+import OAuth from '../Compontens/OAuth';
 
 export const SignIn = () => {
     const [formData,setFormData]=useState({});
@@ -66,7 +67,7 @@ const handelChange=(e)=>{
                     SignIn
                 </button>
                 }
-
+            <OAuth/>
             </form>
             <div className='flex gap-2 mt-5'>
                 <p>Already Have an account?</p>
