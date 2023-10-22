@@ -17,7 +17,7 @@ export const createListing=async(req,res,next)=>{
     } catch (error) {
         return next(errorHandler(401, error));
     }
-    res.json({
-        message: req.body
-    });
+}
+export const deleteListing=(req,res,next)=>{
+    console.log();
 }

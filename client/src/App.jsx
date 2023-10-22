@@ -1,17 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { useState } from 'react'
-import { Home } from './pages/home'
+import { Home } from './pages/Home'
 import { SignUp } from './pages/SignUp'
 import { About } from './pages/About'
 import { SignIn } from './pages/SignIn';
 import {Notfound} from './pages/Notfound';
 import CreateListing from './pages/CreateListing';
 import { PrivateRoute } from './Compontens/PrivateRoute';
+import { Header } from './Compontens/Header';
 
 function App() {
   return (
     <BrowserRouter>
+    <Header/>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/sign-in' element={<SignIn/>}/>
