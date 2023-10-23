@@ -10,6 +10,7 @@ import CreateListing from './pages/CreateListing';
 import { PrivateRoute } from './Compontens/PrivateRoute';
 import { Header } from './Compontens/Header';
 import { Search } from './Compontens/Search';
+import {Listing} from './pages/Listing';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/sign-up' element={<SignUp/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/search" element={<Search/>}/>
+        <Route path='/listing/:listingId' element={<Listing />} />
         <Route element={<PrivateRoute/>}>
           <Route path="/create-listing" element={<CreateListing/>}/>
         </Route>
