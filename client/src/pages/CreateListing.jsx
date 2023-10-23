@@ -8,13 +8,19 @@ import {
 import { app } from '../firebase';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import ImageSourceInit from "../image/Video-Place-Here.png"
+import axios from 'axios';
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
-    imageUrls: [],
+    imageUrls: [
+      ImageSourceInit,
+      ImageSourceInit,
+      ImageSourceInit,
+    ],
     name: '',
     description: '',
     address: '',
@@ -125,33 +131,32 @@ export default function CreateListing() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
       if (formData.imageUrls.length < 1)
         return setError('You must upload at least one image');
       if (+formData.regularPrice < +formData.discountPrice)
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/listing/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      await axios.post("http://localhost:8800/api/listing/create",{
+        data:{
           ...formData,
           userRef: currentUser._id,
-        }),
-      });
-      const data = await res.json();
-      setLoading(false);
-      if (data.success === false) {
-        setError(data.message);
-      }
-      navigate(`/listing/${data._id}`);
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
+        }
+      }).then((res)=>{
+        if (res.status=200) {
+          setError(false)
+          setLoading(false);
+          navigate(`/listing/${res.data.data._id}`);
+        }else{          
+          console.log("--------------------");
+          console.log(res);
+          setLoading(false);
+          // setError(res)
+        }
+      }).catch((err)=>{
+        setLoading(false);
+        setError(err.response.data.message);
+      })
   };
   return (
     <main className='p-3 max-w-4xl mx-auto'>
@@ -340,7 +345,7 @@ export default function CreateListing() {
           {formData.imageUrls.length > 0 &&
             formData.imageUrls.map((url, index) => (
               <div
-                key={url}
+                key={index}
                 className='flex justify-between p-3 border items-center'
               >
                 <img

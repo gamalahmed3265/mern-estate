@@ -11,7 +11,7 @@ export function validListingCreation(obi){
         bedrooms: Joi.number().required().min(1).max(10),
         furnished: Joi.boolean().required(),
         parking: Joi.boolean().required(),
-        type: Joi.string().trim().required().min(5).max(100),
+        type: Joi.string().trim().required(),
         offer: Joi.boolean().required(),
         imageUrls: Joi.array().required(),
         userRef: Joi.string().trim().required().min(5).max(100), 

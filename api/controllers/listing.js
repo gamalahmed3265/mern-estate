@@ -4,10 +4,10 @@ import Listing from "../models/listing.js"
 
 
 export const createListing=async(req,res,next)=>{
-    const {error}=validListingCreation(req.body);
+    const {error}=validListingCreation(req.body.data);
     if (error)return next(errorHandler(404,error.details[0].message))
     
-    const listing=await Listing.create(req.body);
+    const listing=await Listing.create(req.body.data);
     try {
         return res.status(200).json({
             status:200,
